@@ -1,1 +1,1460 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <link rel="icon" type="image/jpeg" href="./icon.JPG">
+<link rel="apple-touch-icon" href="./icon.JPG">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#172033">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="مرآة اليوم">
 
+<link rel="icon" type="image/jpeg" href="./icon.JPG">
+<link rel="apple-touch-icon" href="./icon.JPG">
+
+<title>مرآة اليوم</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&family=Amiri:wght@400;700&display=swap');
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+:root{
+    --bg:#f4f1eb;
+    --surface:#fffdf9;
+    --surface-2:#f8f5ef;
+    --primary:#596b61;
+    --primary-dark:#405148;
+    --accent:#b89b6a;
+    --accent-light:#e9ddc5;
+    --text:#26332e;
+    --muted:#7b827d;
+    --border:#e5dfd4;
+    --danger:#a8665d;
+    --shadow:0 12px 35px rgba(48,55,49,.08);
+    --radius:24px;
+}
+
+body{
+    font-family:"Cairo",sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    min-height:100vh;
+    overflow-x:hidden;
+}
+
+button,
+input,
+textarea,
+select{
+    font-family:inherit;
+}
+
+button{
+    cursor:pointer;
+}
+
+.app{
+    width:100%;
+    max-width:1180px;
+    margin:auto;
+    padding:22px;
+    padding-bottom:100px;
+}
+
+header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:28px;
+}
+
+.brand{
+    display:flex;
+    align-items:center;
+    gap:13px;
+}
+
+.brand-icon{
+    width:48px;
+    height:48px;
+    border-radius:16px;
+    background:var(--primary);
+    color:white;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:23px;
+    box-shadow:var(--shadow);
+}
+
+.brand h1{
+    font-size:21px;
+    font-weight:800;
+}
+
+.brand p{
+    color:var(--muted);
+    font-size:12px;
+    margin-top:1px;
+}
+
+.icon-btn{
+    width:44px;
+    height:44px;
+    border:1px solid var(--border);
+    background:var(--surface);
+    border-radius:15px;
+    color:var(--text);
+    font-size:19px;
+}
+
+.hero{
+    background:linear-gradient(135deg,#596b61,#46584f);
+    color:white;
+    border-radius:30px;
+    padding:30px;
+    position:relative;
+    overflow:hidden;
+    margin-bottom:22px;
+    box-shadow:var(--shadow);
+}
+
+.hero:before{
+    content:"";
+    position:absolute;
+    width:220px;
+    height:220px;
+    border-radius:50%;
+    border:1px solid rgba(255,255,255,.12);
+    left:-70px;
+    top:-80px;
+}
+
+.hero:after{
+    content:"";
+    position:absolute;
+    width:160px;
+    height:160px;
+    border-radius:50%;
+    border:1px solid rgba(255,255,255,.08);
+    left:70px;
+    bottom:-110px;
+}
+
+.hero-content{
+    position:relative;
+    z-index:2;
+}
+
+.date{
+    font-size:12px;
+    opacity:.78;
+    margin-bottom:8px;
+}
+
+.hero h2{
+    font-family:"Amiri",serif;
+    font-size:32px;
+    line-height:1.4;
+    margin-bottom:8px;
+}
+
+.hero p{
+    font-size:14px;
+    opacity:.82;
+    max-width:650px;
+}
+
+.quote{
+    margin-top:20px;
+    background:rgba(255,255,255,.1);
+    border:1px solid rgba(255,255,255,.12);
+    border-radius:18px;
+    padding:14px 16px;
+    font-family:"Amiri",serif;
+    font-size:18px;
+}
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:14px;
+    margin-bottom:22px;
+}
+
+.stat{
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:21px;
+    padding:19px;
+    box-shadow:var(--shadow);
+}
+
+.stat-icon{
+    width:38px;
+    height:38px;
+    border-radius:13px;
+    background:var(--accent-light);
+    color:var(--primary-dark);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    margin-bottom:13px;
+}
+
+.stat strong{
+    display:block;
+    font-size:25px;
+    font-weight:800;
+}
+
+.stat span{
+    color:var(--muted);
+    font-size:12px;
+}
+
+.section-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin:26px 0 14px;
+}
+
+.section-head h3{
+    font-size:17px;
+    font-weight:800;
+}
+
+.section-head button{
+    border:none;
+    background:none;
+    color:var(--primary);
+    font-size:12px;
+    font-weight:700;
+}
+
+.actions{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:14px;
+}
+
+.action{
+    border:1px solid var(--border);
+    background:var(--surface);
+    border-radius:22px;
+    padding:20px;
+    text-align:right;
+    color:var(--text);
+    transition:.2s;
+    box-shadow:var(--shadow);
+}
+
+.action:hover{
+    transform:translateY(-3px);
+}
+
+.action-icon{
+    width:43px;
+    height:43px;
+    border-radius:14px;
+    background:var(--surface-2);
+    color:var(--primary);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:20px;
+    margin-bottom:14px;
+}
+
+.action h4{
+    font-size:14px;
+    margin-bottom:4px;
+}
+
+.action p{
+    font-size:11px;
+    color:var(--muted);
+}
+
+.today{
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:25px;
+    padding:22px;
+    box-shadow:var(--shadow);
+}
+
+.today-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:20px;
+}
+
+.today-label{
+    color:var(--accent);
+    font-size:12px;
+    font-weight:800;
+    margin-bottom:5px;
+}
+
+.today h3{
+    font-family:"Amiri",serif;
+    font-size:25px;
+}
+
+.progress-wrap{
+    margin-top:18px;
+}
+
+.progress-info{
+    display:flex;
+    justify-content:space-between;
+    font-size:11px;
+    color:var(--muted);
+    margin-bottom:7px;
+}
+
+.progress{
+    height:9px;
+    background:var(--surface-2);
+    border-radius:20px;
+    overflow:hidden;
+}
+
+.progress span{
+    display:block;
+    height:100%;
+    background:var(--primary);
+    border-radius:20px;
+    width:0;
+    transition:.4s;
+}
+
+.journal{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:18px;
+}
+
+.card{
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:25px;
+    padding:22px;
+    box-shadow:var(--shadow);
+}
+
+.card h3{
+    font-size:16px;
+    margin-bottom:5px;
+}
+
+.card-sub{
+    color:var(--muted);
+    font-size:11px;
+    margin-bottom:17px;
+}
+
+textarea{
+    width:100%;
+    min-height:180px;
+    resize:vertical;
+    border:1px solid var(--border);
+    background:var(--surface-2);
+    border-radius:18px;
+    padding:15px;
+    color:var(--text);
+    outline:none;
+    font-size:13px;
+    line-height:1.9;
+}
+
+textarea:focus,
+input:focus,
+select:focus{
+    border-color:var(--primary);
+}
+
+.save-btn{
+    width:100%;
+    border:none;
+    background:var(--primary);
+    color:white;
+    padding:13px;
+    border-radius:15px;
+    margin-top:12px;
+    font-weight:700;
+}
+
+.mood-grid{
+    display:grid;
+    grid-template-columns:repeat(5,1fr);
+    gap:8px;
+}
+
+.mood{
+    border:1px solid var(--border);
+    background:var(--surface-2);
+    border-radius:16px;
+    padding:12px 5px;
+    text-align:center;
+    color:var(--text);
+    transition:.2s;
+}
+
+.mood span{
+    display:block;
+    font-size:23px;
+    margin-bottom:3px;
+}
+
+.mood small{
+    font-size:9px;
+    color:var(--muted);
+}
+
+.mood.active{
+    border-color:var(--primary);
+    background:var(--accent-light);
+}
+
+.reflection-list{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+}
+
+.reflection{
+    padding:13px;
+    border-radius:15px;
+    background:var(--surface-2);
+    border:1px solid var(--border);
+    font-size:12px;
+    line-height:1.8;
+}
+
+.reflection-date{
+    display:block;
+    color:var(--muted);
+    font-size:9px;
+    margin-bottom:3px;
+}
+
+.empty{
+    text-align:center;
+    color:var(--muted);
+    padding:28px 10px;
+    font-size:12px;
+}
+
+.calendar{
+    display:grid;
+    grid-template-columns:repeat(7,1fr);
+    gap:6px;
+}
+
+.day{
+    aspect-ratio:1;
+    background:var(--surface-2);
+    border-radius:11px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:10px;
+    color:var(--muted);
+    position:relative;
+}
+
+.day.active{
+    background:var(--primary);
+    color:white;
+}
+
+.day.marked:after{
+    content:"";
+    position:absolute;
+    bottom:5px;
+    width:4px;
+    height:4px;
+    border-radius:50%;
+    background:var(--accent);
+}
+
+.bottom-nav{
+    position:fixed;
+    bottom:16px;
+    left:50%;
+    transform:translateX(-50%);
+    width:min(94%,600px);
+    background:rgba(255,253,249,.94);
+    backdrop-filter:blur(16px);
+    border:1px solid var(--border);
+    border-radius:23px;
+    padding:8px;
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    box-shadow:0 15px 45px rgba(0,0,0,.12);
+    z-index:50;
+}
+
+.nav-btn{
+    border:none;
+    background:none;
+    color:var(--muted);
+    padding:9px 5px;
+    border-radius:16px;
+    font-size:10px;
+}
+
+.nav-btn span{
+    display:block;
+    font-size:18px;
+    margin-bottom:2px;
+}
+
+.nav-btn.active{
+    background:var(--surface-2);
+    color:var(--primary);
+    font-weight:800;
+}
+
+.view{
+    display:none;
+}
+
+.view.active{
+    display:block;
+}
+
+.modal{
+    position:fixed;
+    inset:0;
+    background:rgba(23,32,51,.42);
+    backdrop-filter:blur(6px);
+    display:none;
+    align-items:flex-end;
+    justify-content:center;
+    z-index:100;
+}
+
+.modal.show{
+    display:flex;
+}
+
+.modal-box{
+    width:min(100%,620px);
+    background:var(--surface);
+    border-radius:28px 28px 0 0;
+    padding:24px;
+    animation:slideUp .25s ease;
+}
+
+@keyframes slideUp{
+    from{transform:translateY(100%)}
+    to{transform:translateY(0)}
+}
+
+.modal-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:20px;
+}
+
+.modal-head h3{
+    font-size:18px;
+}
+
+.close{
+    border:none;
+    background:var(--surface-2);
+    width:38px;
+    height:38px;
+    border-radius:13px;
+}
+
+.field{
+    margin-bottom:14px;
+}
+
+.field label{
+    display:block;
+    font-size:11px;
+    margin-bottom:6px;
+    color:var(--muted);
+}
+
+.field input,
+.field select{
+    width:100%;
+    border:1px solid var(--border);
+    background:var(--surface-2);
+    padding:13px;
+    border-radius:14px;
+    outline:none;
+    color:var(--text);
+}
+
+.modal-actions{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+    margin-top:18px;
+}
+
+.cancel{
+    border:1px solid var(--border);
+    background:var(--surface-2);
+    border-radius:14px;
+    padding:12px;
+}
+
+.confirm{
+    border:none;
+    background:var(--primary);
+    color:white;
+    border-radius:14px;
+    padding:12px;
+    font-weight:700;
+}
+
+.toast{
+    position:fixed;
+    top:22px;
+    left:50%;
+    transform:translateX(-50%) translateY(-20px);
+    background:#26332e;
+    color:white;
+    padding:11px 18px;
+    border-radius:14px;
+    font-size:11px;
+    opacity:0;
+    pointer-events:none;
+    transition:.3s;
+    z-index:200;
+}
+
+.toast.show{
+    opacity:1;
+    transform:translateX(-50%) translateY(0);
+}
+
+@media(max-width:800px){
+    .stats{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .actions{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .journal{
+        grid-template-columns:1fr;
+    }
+}
+
+@media(max-width:520px){
+    .app{
+        padding:16px;
+        padding-bottom:100px;
+    }
+
+    header{
+        margin-bottom:20px;
+    }
+
+    .brand h1{
+        font-size:18px;
+    }
+
+    .hero{
+        padding:23px;
+        border-radius:25px;
+    }
+
+    .hero h2{
+        font-size:28px;
+    }
+
+    .stats{
+        gap:9px;
+    }
+
+    .stat{
+        padding:15px;
+        border-radius:18px;
+    }
+
+    .stat strong{
+        font-size:22px;
+    }
+
+    .actions{
+        gap:9px;
+    }
+
+    .action{
+        padding:16px;
+        border-radius:18px;
+    }
+
+    .mood-grid{
+        gap:5px;
+    }
+
+    .mood{
+        padding:9px 2px;
+    }
+
+    .mood span{
+        font-size:20px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+<header>
+    <div class="brand">
+        <div class="brand-icon">◌</div>
+        <div>
+            <h1>مرآة اليوم</h1>
+            <p>مساحة هادئة للتأمل والنمو</p>
+        </div>
+    </div>
+    <button class="icon-btn" id="themeBtn">☼</button>
+</header>
+
+<main>
+
+<section class="view active" id="homeView">
+
+    <div class="hero">
+        <div class="hero-content">
+            <div class="date" id="todayDate"></div>
+            <h2 id="greeting">كيف كان يومك؟</h2>
+            <p>توقّف قليلًا، وانظر إلى يومك بصدق وهدوء.</p>
+            <div class="quote" id="dailyQuote"></div>
+        </div>
+    </div>
+
+    <div class="stats">
+        <div class="stat">
+            <div class="stat-icon">✦</div>
+            <strong id="daysCount">0</strong>
+            <span>أيام التأمل</span>
+        </div>
+
+        <div class="stat">
+            <div class="stat-icon">☷</div>
+            <strong id="entriesCount">0</strong>
+            <span>تأملات مكتوبة</span>
+        </div>
+
+        <div class="stat">
+            <div class="stat-icon">♡</div>
+            <strong id="moodCount">0</strong>
+            <span>أيام سُجل فيها المزاج</span>
+        </div>
+
+        <div class="stat">
+            <div class="stat-icon">↗</div>
+            <strong id="streakCount">0</strong>
+            <span>أيام متتالية</span>
+        </div>
+    </div>
+
+    <div class="section-head">
+        <h3>ماذا تريد أن تفعل؟</h3>
+    </div>
+
+    <div class="actions">
+        <button class="action" onclick="openReflection()">
+            <div class="action-icon">✎</div>
+            <h4>اكتب تأملك</h4>
+            <p>سجّل ما يدور في داخلك</p>
+        </button>
+
+        <button class="action" onclick="openMood()">
+            <div class="action-icon">◉</div>
+            <h4>سجّل مزاجك</h4>
+            <p>كيف تشعر اليوم؟</p>
+        </button>
+
+        <button class="action" onclick="openView('historyView')">
+            <div class="action-icon">◷</div>
+            <h4>رحلتي</h4>
+            <p>راجع أيامك السابقة</p>
+        </button>
+
+        <button class="action" onclick="openView('insightView')">
+            <div class="action-icon">◇</div>
+            <h4>إحصاءاتي</h4>
+            <p>اكتشف عاداتك</p>
+        </button>
+    </div>
+
+    <div class="section-head">
+        <h3>لحظة اليوم</h3>
+        <button onclick="openReflection()">تعديل</button>
+    </div>
+
+    <div class="today">
+        <div class="today-top">
+            <div>
+                <div class="today-label">تأملك اليوم</div>
+                <h3 id="todayReflectionTitle">لم تكتب تأملك بعد</h3>
+            </div>
+            <div style="font-size:30px;">☾</div>
+        </div>
+
+        <div class="progress-wrap">
+            <div class="progress-info">
+                <span>اكتمال اليوم</span>
+                <span id="todayPercent">0%</span>
+            </div>
+            <div class="progress">
+                <span id="todayProgress"></span>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+<section class="view" id="reflectionView">
+
+    <div class="section-head">
+        <h3>تأمل اليوم</h3>
+        <button onclick="openView('homeView')">الرئيسية</button>
+    </div>
+
+    <div class="journal">
+
+        <div class="card">
+            <h3>ماذا حدث اليوم؟</h3>
+            <div class="card-sub">اكتب بحرية دون الاهتمام بصياغة مثالية.</div>
+            <textarea id="reflectionText" placeholder="اكتب ما تريد تذكره عن هذا اليوم..."></textarea>
+            <button class="save-btn" onclick="saveReflection()">حفظ التأمل</button>
+        </div>
+
+        <div class="card">
+            <h3>كيف كان شعورك؟</h3>
+            <div class="card-sub">اختر الحالة الأقرب إلى شعورك الآن.</div>
+
+            <div class="mood-grid">
+                <button class="mood" data-mood="ممتاز" onclick="selectMood(this)">
+                    <span>☀</span>
+                    <small>ممتاز</small>
+                </button>
+                <button class="mood" data-mood="جيد" onclick="selectMood(this)">
+                    <span>◒</span>
+                    <small>جيد</small>
+                </button>
+                <button class="mood" data-mood="هادئ" onclick="selectMood(this)">
+                    <span>◌</span>
+                    <small>هادئ</small>
+                </button>
+                <button class="mood" data-mood="متعب" onclick="selectMood(this)">
+                    <span>☾</span>
+                    <small>متعب</small>
+                </button>
+                <button class="mood" data-mood="صعب" onclick="selectMood(this)">
+                    <span>○</span>
+                    <small>صعب</small>
+                </button>
+            </div>
+
+            <button class="save-btn" onclick="saveMood()">حفظ الحالة</button>
+        </div>
+
+    </div>
+
+    <div class="section-head">
+        <h3>أسئلة تساعدك</h3>
+    </div>
+
+    <div class="card">
+        <div class="reflection-list">
+            <div class="reflection">
+                <strong>ما الشيء الذي أسعدني اليوم؟</strong>
+            </div>
+            <div class="reflection">
+                <strong>ما الشيء الذي أريد أن أتعلم منه؟</strong>
+            </div>
+            <div class="reflection">
+                <strong>ما الشيء الذي أستطيع تحسينه غدًا؟</strong>
+            </div>
+            <div class="reflection">
+                <strong>ما الشيء الذي أشعر بالامتنان لوجوده؟</strong>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+<section class="view" id="historyView">
+
+    <div class="section-head">
+        <h3>رحلتي</h3>
+        <button onclick="openView('homeView')">الرئيسية</button>
+    </div>
+
+    <div class="card">
+        <h3>الأيام السابقة</h3>
+        <div class="card-sub">مساحتك الخاصة لتتذكر كيف مرّت الأيام.</div>
+        <div class="reflection-list" id="historyList"></div>
+    </div>
+
+</section>
+
+<section class="view" id="insightView">
+
+    <div class="section-head">
+        <h3>إحصاءاتي</h3>
+        <button onclick="openView('homeView')">الرئيسية</button>
+    </div>
+
+    <div class="stats">
+        <div class="stat">
+            <div class="stat-icon">✦</div>
+            <strong id="insightEntries">0</strong>
+            <span>إجمالي التأملات</span>
+        </div>
+
+        <div class="stat">
+            <div class="stat-icon">♡</div>
+            <strong id="insightMoods">0</strong>
+            <span>تسجيلات المزاج</span>
+        </div>
+
+        <div class="stat">
+            <div class="stat-icon">↗</div>
+            <strong id="insightStreak">0</strong>
+            <span>أفضل استمرارية</span>
+        </div>
+
+        <div class="stat">
+            <div class="stat-icon">◷</div>
+            <strong id="insightDays">0</strong>
+            <span>أيام مستخدمة</span>
+        </div>
+    </div>
+
+    <div class="card">
+        <h3>أيامك الأخيرة</h3>
+        <div class="card-sub">كل يوم تكتبه هو خطوة صغيرة نحو وعي أكبر.</div>
+        <div class="calendar" id="calendar"></div>
+    </div>
+
+</section>
+
+</main>
+</div>
+
+<nav class="bottom-nav">
+    <button class="nav-btn active" data-view="homeView" onclick="openView('homeView')">
+        <span>⌂</span>
+        الرئيسية
+    </button>
+
+    <button class="nav-btn" data-view="reflectionView" onclick="openReflection()">
+        <span>✎</span>
+        تأمل
+    </button>
+
+    <button class="nav-btn" data-view="historyView" onclick="openView('historyView')">
+        <span>◷</span>
+        رحلتي
+    </button>
+
+    <button class="nav-btn" data-view="insightView" onclick="openView('insightView')">
+        <span>◇</span>
+        إحصاءات
+    </button>
+</nav>
+
+<div class="modal" id="reflectionModal">
+    <div class="modal-box">
+        <div class="modal-head">
+            <h3>تأمل اليوم</h3>
+            <button class="close" onclick="closeModal('reflectionModal')">×</button>
+        </div>
+
+        <div class="field">
+            <label>ماذا تريد أن تتذكر عن يومك؟</label>
+            <textarea id="modalReflection" placeholder="اكتب هنا..."></textarea>
+        </div>
+
+        <button class="save-btn" onclick="saveModalReflection()">حفظ</button>
+    </div>
+</div>
+
+<div class="modal" id="moodModal">
+    <div class="modal-box">
+        <div class="modal-head">
+            <h3>مزاج اليوم</h3>
+            <button class="close" onclick="closeModal('moodModal')">×</button>
+        </div>
+
+        <div class="mood-grid">
+            <button class="mood" data-mood="ممتاز" onclick="selectModalMood(this)">
+                <span>☀</span>
+                <small>ممتاز</small>
+            </button>
+            <button class="mood" data-mood="جيد" onclick="selectModalMood(this)">
+                <span>◒</span>
+                <small>جيد</small>
+            </button>
+            <button class="mood" data-mood="هادئ" onclick="selectModalMood(this)">
+                <span>◌</span>
+                <small>هادئ</small>
+            </button>
+            <button class="mood" data-mood="متعب" onclick="selectModalMood(this)">
+                <span>☾</span>
+                <small>متعب</small>
+            </button>
+            <button class="mood" data-mood="صعب" onclick="selectModalMood(this)">
+                <span>○</span>
+                <small>صعب</small>
+            </button>
+        </div>
+
+        <button class="save-btn" onclick="saveModalMood()">حفظ الحالة</button>
+    </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+"use strict";
+
+const STORAGE_KEY = "mirror_today_state";
+
+const quotes = [
+    "أحيانًا يكون التوقف قليلًا هو الطريق الأفضل للمضي قدمًا.",
+    "من عرف نفسه، عرف أين يضع خطوته التالية.",
+    "لا تحتاج كل يوم إلى إنجاز عظيم؛ يكفي أن يكون فيه معنى.",
+    "ما تكتبه اليوم قد يصبح غدًا دليلًا على مقدار ما تغيّرت.",
+    "الوعي بالبدايات الصغيرة يصنع تغييرات كبيرة.",
+    "ليس كل يوم متشابهًا، وهذا جزء من جمال الرحلة."
+];
+
+const defaultState = {
+    reflections:{},
+    moods:{},
+    theme:"light"
+};
+
+let state = loadState();
+let selectedMood = null;
+let selectedModalMood = null;
+
+function loadState(){
+    try{
+        const saved = localStorage.getItem(STORAGE_KEY);
+        return saved ? {...defaultState,...JSON.parse(saved)} : {...defaultState};
+    }catch(e){
+        return {...defaultState};
+    }
+}
+
+function saveState(){
+    localStorage.setItem(STORAGE_KEY,JSON.stringify(state));
+}
+
+function dateKey(date=new Date()){
+    const y=date.getFullYear();
+    const m=String(date.getMonth()+1).padStart(2,"0");
+    const d=String(date.getDate()).padStart(2,"0");
+    return `${y}-${m}-${d}`;
+}
+
+function formatDate(key){
+    const d=new Date(key+"T12:00:00");
+    return new Intl.DateTimeFormat("ar-EG",{
+        weekday:"long",
+        day:"numeric",
+        month:"long",
+        year:"numeric"
+    }).format(d);
+}
+
+function showToast(message){
+    const toast=document.getElementById("toast");
+    toast.textContent=message;
+    toast.classList.add("show");
+    setTimeout(()=>toast.classList.remove("show"),2200);
+}
+
+function openView(id){
+    document.querySelectorAll(".view").forEach(v=>v.classList.remove("active"));
+    document.getElementById(id).classList.add("active");
+
+    document.querySelectorAll(".nav-btn").forEach(btn=>{
+        btn.classList.toggle("active",btn.dataset.view===id);
+    });
+
+    window.scrollTo({top:0,behavior:"smooth"});
+
+    if(id==="historyView") renderHistory();
+    if(id==="insightView") renderInsights();
+}
+
+function openReflection(){
+    openView("reflectionView");
+
+    const key=dateKey();
+    document.getElementById("reflectionText").value=state.reflections[key]||"";
+
+    document.querySelectorAll("#reflectionView .mood").forEach(btn=>{
+        btn.classList.toggle("active",btn.dataset.mood===state.moods[key]);
+    });
+}
+
+function openMood(){
+    selectedModalMood=state.moods[dateKey()]||null;
+    document.querySelectorAll("#moodModal .mood").forEach(btn=>{
+        btn.classList.toggle("active",btn.dataset.mood===selectedModalMood);
+    });
+    document.getElementById("moodModal").classList.add("show");
+}
+
+function closeModal(id){
+    document.getElementById(id).classList.remove("show");
+}
+
+function selectMood(button){
+    document.querySelectorAll("#reflectionView .mood").forEach(btn=>btn.classList.remove("active"));
+    button.classList.add("active");
+    selectedMood=button.dataset.mood;
+}
+
+function selectModalMood(button){
+    document.querySelectorAll("#moodModal .mood").forEach(btn=>btn.classList.remove("active"));
+    button.classList.add("active");
+    selectedModalMood=button.dataset.mood;
+}
+
+function saveReflection(){
+    const key=dateKey();
+    const text=document.getElementById("reflectionText").value.trim();
+
+    if(!text){
+        showToast("اكتب شيئًا قبل الحفظ");
+        return;
+    }
+
+    state.reflections[key]=text;
+
+    if(selectedMood){
+        state.moods[key]=selectedMood;
+    }
+
+    saveState();
+    renderAll();
+    showToast("تم حفظ تأملك");
+}
+
+function saveMood(){
+    const key=dateKey();
+    const mood=selectedMood || state.moods[key];
+
+    if(!mood){
+        showToast("اختر حالتك أولًا");
+        return;
+    }
+
+    state.moods[key]=mood;
+    saveState();
+    renderAll();
+    showToast("تم حفظ حالتك");
+}
+
+function saveModalReflection(){
+    const text=document.getElementById("modalReflection").value.trim();
+
+    if(!text){
+        showToast("اكتب تأملك أولًا");
+        return;
+    }
+
+    state.reflections[dateKey()]=text;
+    saveState();
+
+    document.getElementById("modalReflection").value="";
+    closeModal("reflectionModal");
+    renderAll();
+    showToast("تم حفظ تأملك");
+}
+
+function saveModalMood(){
+    if(!selectedModalMood){
+        showToast("اختر حالتك أولًا");
+        return;
+    }
+
+    state.moods[dateKey()]=selectedModalMood;
+    saveState();
+
+    closeModal("moodModal");
+    renderAll();
+    showToast("تم حفظ مزاجك");
+}
+
+function calculateStreak(){
+    let streak=0;
+    let current=new Date();
+
+    while(true){
+        const key=dateKey(current);
+
+        if(state.reflections[key] || state.moods[key]){
+            streak++;
+            current.setDate(current.getDate()-1);
+        }else{
+            break;
+        }
+    }
+
+    return streak;
+}
+
+function getBestStreak(){
+    const dates=[
+        ...new Set([
+            ...Object.keys(state.reflections),
+            ...Object.keys(state.moods)
+        ])
+    ].sort();
+
+    if(!dates.length) return 0;
+
+    let best=1;
+    let current=1;
+
+    for(let i=1;i<dates.length;i++){
+        const a=new Date(dates[i-1]+"T12:00:00");
+        const b=new Date(dates[i]+"T12:00:00");
+        const diff=(b-a)/(1000*60*60*24);
+
+        if(diff===1){
+            current++;
+            best=Math.max(best,current);
+        }else{
+            current=1;
+        }
+    }
+
+    return best;
+}
+
+function updateHome(){
+    const now=new Date();
+
+    document.getElementById("todayDate").textContent=
+        new Intl.DateTimeFormat("ar-EG",{
+            weekday:"long",
+            day:"numeric",
+            month:"long"
+        }).format(now);
+
+    document.getElementById("dailyQuote").textContent=
+        quotes[now.getDate()%quotes.length];
+
+    const hour=now.getHours();
+
+    let greeting="كيف كان يومك؟";
+
+    if(hour<12) greeting="صباحك هادئ، كيف بدأت يومك؟";
+    else if(hour<18) greeting="كيف يمضي يومك؟";
+    else greeting="كيف كان يومك؟";
+
+    document.getElementById("greeting").textContent=greeting;
+
+    const reflectionCount=Object.keys(state.reflections).length;
+    const moodCount=Object.keys(state.moods).length;
+    const days=new Set([
+        ...Object.keys(state.reflections),
+        ...Object.keys(state.moods)
+    ]).size;
+
+    const streak=calculateStreak();
+
+    document.getElementById("entriesCount").textContent=reflectionCount;
+    document.getElementById("moodCount").textContent=moodCount;
+    document.getElementById("daysCount").textContent=days;
+    document.getElementById("streakCount").textContent=streak;
+
+    const today=dateKey();
+    const hasReflection=!!state.reflections[today];
+    const hasMood=!!state.moods[today];
+
+    const percent=(hasReflection?50:0)+(hasMood?50:0);
+
+    document.getElementById("todayPercent").textContent=percent+"%";
+    document.getElementById("todayProgress").style.width=percent+"%";
+
+    if(hasReflection){
+        const text=state.reflections[today];
+        document.getElementById("todayReflectionTitle").textContent=
+            text.length>55 ? text.slice(0,55)+"…" : text;
+    }else{
+        document.getElementById("todayReflectionTitle").textContent=
+            "لم تكتب تأملك بعد";
+    }
+}
+
+function renderHistory(){
+    const list=document.getElementById("historyList");
+
+    const dates=[
+        ...new Set([
+            ...Object.keys(state.reflections),
+            ...Object.keys(state.moods)
+        ])
+    ].sort((a,b)=>b.localeCompare(a));
+
+    if(!dates.length){
+        list.innerHTML='<div class="empty">لا توجد تأملات سابقة بعد.</div>';
+        return;
+    }
+
+    list.innerHTML=dates.map(key=>{
+        const reflection=state.reflections[key];
+        const mood=state.moods[key];
+
+        return `
+            <div class="reflection">
+                <span class="reflection-date">${formatDate(key)}${mood?` · ${mood}`:""}</span>
+                ${reflection?escapeHtml(reflection):"تم تسجيل المزاج فقط."}
+            </div>
+        `;
+    }).join("");
+}
+
+function renderInsights(){
+    const entries=Object.keys(state.reflections).length;
+    const moods=Object.keys(state.moods).length;
+    const days=new Set([
+        ...Object.keys(state.reflections),
+        ...Object.keys(state.moods)
+    ]).size;
+
+    document.getElementById("insightEntries").textContent=entries;
+    document.getElementById("insightMoods").textContent=moods;
+    document.getElementById("insightDays").textContent=days;
+    document.getElementById("insightStreak").textContent=getBestStreak();
+
+    renderCalendar();
+}
+
+function renderCalendar(){
+    const calendar=document.getElementById("calendar");
+    const today=new Date();
+
+    const days=[];
+
+    for(let i=29;i>=0;i--){
+        const d=new Date(today);
+        d.setDate(today.getDate()-i);
+        days.push(d);
+    }
+
+    calendar.innerHTML=days.map(d=>{
+        const key=dateKey(d);
+        const active=key===dateKey(today);
+        const marked=!!(state.reflections[key]||state.moods[key]);
+
+        return `
+            <div class="day ${active?"active":""} ${marked?"marked":""}">
+                ${d.getDate()}
+            </div>
+        `;
+    }).join("");
+}
+
+function escapeHtml(text){
+    const div=document.createElement("div");
+    div.textContent=text;
+    return div.innerHTML.replace(/\n/g,"<br>");
+}
+
+function renderAll(){
+    updateHome();
+    renderHistory();
+    renderInsights();
+
+    const key=dateKey();
+
+    document.getElementById("reflectionText").value=
+        state.reflections[key]||"";
+
+    document.querySelectorAll("#reflectionView .mood").forEach(btn=>{
+        btn.classList.toggle("active",btn.dataset.mood===state.moods[key]);
+    });
+}
+
+function toggleTheme(){
+    if(state.theme==="dark"){
+        state.theme="light";
+        document.documentElement.style.setProperty("--bg","#f4f1eb");
+        document.documentElement.style.setProperty("--surface","#fffdf9");
+        document.documentElement.style.setProperty("--surface-2","#f8f5ef");
+        document.documentElement.style.setProperty("--text","#26332e");
+        document.documentElement.style.setProperty("--border","#e5dfd4");
+        document.documentElement.style.setProperty("--muted","#7b827d");
+    }else{
+        state.theme="dark";
+        document.documentElement.style.setProperty("--bg","#111815");
+        document.documentElement.style.setProperty("--surface","#19211d");
+        document.documentElement.style.setProperty("--surface-2","#202a25");
+        document.documentElement.style.setProperty("--text","#edf1ed");
+        document.documentElement.style.setProperty("--border","#2d3933");
+        document.documentElement.style.setProperty("--muted","#9aa59f");
+    }
+
+    saveState();
+}
+
+function applyTheme(){
+    if(state.theme==="dark"){
+        document.documentElement.style.setProperty("--bg","#111815");
+        document.documentElement.style.setProperty("--surface","#19211d");
+        document.documentElement.style.setProperty("--surface-2","#202a25");
+        document.documentElement.style.setProperty("--text","#edf1ed");
+        document.documentElement.style.setProperty("--border","#2d3933");
+        document.documentElement.style.setProperty("--muted","#9aa59f");
+    }
+}
+
+document.getElementById("themeBtn").addEventListener("click",toggleTheme);
+
+document.getElementById("reflectionModal").addEventListener("click",e=>{
+    if(e.target.id==="reflectionModal"){
+        closeModal("reflectionModal");
+    }
+});
+
+document.getElementById("moodModal").addEventListener("click",e=>{
+    if(e.target.id==="moodModal"){
+        closeModal("moodModal");
+    }
+});
+
+applyTheme();
+renderAll();
+</script>
+
+</body>
+</html>
